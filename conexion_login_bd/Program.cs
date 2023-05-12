@@ -6,6 +6,11 @@ using System.Windows.Forms;
 
 namespace conexion_login_bd
 {
+    /// <summary>
+    /// Creado por: Juliana Herrera
+    /// Fecha: 11/mayo/2023
+    /// Inicio de sesion conectado con base de datos (sql server)
+    /// </summary>
     internal static class Program
     {
         /// <summary>
@@ -16,7 +21,7 @@ namespace conexion_login_bd
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new frm_1());
         }
     }
 }
