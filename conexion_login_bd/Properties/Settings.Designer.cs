@@ -26,6 +26,8 @@ namespace conexion_login_bd.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-KQUVA2I\\SQLEXPRESS;Initial Catalog=LOGIN;Integrated Security=" +
+            "True")]
         public string Valor {
             get {
                 return ((string)(this["Valor"]));

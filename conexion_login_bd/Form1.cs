@@ -18,11 +18,9 @@ namespace conexion_login_bd
             InitializeComponent();
         }
 
-        // FALTA CORREGIR CONEXION CON BASE DE DATOS, PAQUETES DE SQL NO INSTALADOS
-        // corregir en "server" 
-
-       
-            SqlConnection conexion = new SqlConnection("server=SQLEXPRESS ; database= LOGIN ; INTEGRATED SECURITY = true ");
+        int intentos = 0;
+        // Conexion con base de datos
+         SqlConnection conexion = new SqlConnection(@"Data Source=DESKTOP-KQUVA2I\SQLEXPRESS;Initial Catalog=LOGIN;Integrated Security=True ");
         
     
 
@@ -50,7 +48,7 @@ namespace conexion_login_bd
                     errorProvider1.SetError(txt_usuario, "Ingrese un nombre de usuario");
                     return;
                 }
-                if ( txt_usuario.Text == "")
+                if (txt_usuario.Text == "")
                 {
                     errorProvider1.SetError(txt_usuario, " Debe llenar el campo");
                     return;
@@ -63,7 +61,7 @@ namespace conexion_login_bd
                     errorProvider1.SetError(txt_contraseña, "Ingrese una contraseña");
                     return;
                 }
-                if(txt_contraseña.Text == "")
+                if (txt_contraseña.Text == "")
                 {
                     errorProvider1.SetError(txt_contraseña, " Debe llenar el campo");
                 }
@@ -86,15 +84,26 @@ namespace conexion_login_bd
                 if (lector.Read())
                 {
                     MessageBox.Show("Ingreso correcto");
+                    intentos = 0;
+                    frm2 frm = new frm2();
+                    frm.Show();
                 }
                 else
                 {
+                    intentos++;
                     MessageBox.Show("Usuario y/o contraseña incorrectos");
+                    if(intentos == 3)
+                    {
+                        MessageBox.Show(" Has excedido los intentos. La aplicación se cerrará");
+                        Application.Exit();
+                    }
                 }
 
                 // Cerrar el lector de datos
                 lector.Close();
+                limpiar();
             }
+
             catch (Exception ex)
             {
                 MessageBox.Show("Error en la conexión o consulta: " + ex.Message);
@@ -124,5 +133,13 @@ namespace conexion_login_bd
                 txt_contraseña.PasswordChar = '*';
             }
         }
+
+        public void limpiar()
+        {
+            txt_usuario.Text = "";
+            txt_contraseña.Text = "";
+            txt_usuario.Focus();
+        }
+        
     }
 }
